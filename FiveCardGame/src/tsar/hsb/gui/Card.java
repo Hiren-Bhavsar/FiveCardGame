@@ -21,9 +21,18 @@ public class Card extends JButton {
 
 	private CardFace face;
 
+	private boolean isRevealed;
+
+	private int cardNum;
+
 	public Card() {
 		face = CardFace.Back;
 		updateImage();
+		this.isRevealed = false;
+	}
+
+	public boolean isRevealed() {
+		return isRevealed;
 	}
 
 	public void setCardFace(CardFace face) {
@@ -36,11 +45,20 @@ public class Card extends JButton {
 
 	public void updateImage() {
 		try {
-			ImageIcon imageFace = new ImageIcon(this.face.url);
+			ImageIcon imageFace = new ImageIcon(Card.class.getResource(this.face.url));
 			this.setIcon(imageFace);
+			this.isRevealed = true;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+
+	public int getCardNum() {
+		return cardNum;
+	}
+
+	public void setCardNum(int cardNum) {
+		this.cardNum = cardNum;
 	}
 
 }
