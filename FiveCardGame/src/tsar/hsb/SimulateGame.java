@@ -27,6 +27,7 @@ public class SimulateGame {
 			;
 			for (int i = 0; i < cards.length; i++) {
 				cards[i] = 0;
+				//Reset card deck
 			}
 
 		}
