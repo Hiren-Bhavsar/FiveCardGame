@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import tsar.hsb.SimulateGame;
 import tsar.hsb.font.CustomFont;
 import tsar.hsb.gui.Card.CardFace;
 
@@ -81,6 +84,22 @@ public class GameFrame {
 		JMenu file = new JMenu("File");
 		JMenuItem exit = new JMenuItem("Exit");
 		JMenuItem newGame = new JMenuItem("New Game");
+		JMenuItem simulate = new JMenuItem("Simulate");
+
+		simulate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DecimalFormat df = new DecimalFormat("0.##");
+				df.setRoundingMode(RoundingMode.DOWN);
+				SimulateGame s = new SimulateGame(7921);
+				// Simulates the game 7,921 times, because that's the number my Girlfriend came
+				// up with.
+				s.runSims();
+				JOptionPane.showMessageDialog(null, "Win Percentage Staying: " + df.format(s.stayWinPercentage()) + "%"
+						+ "\n" + "Win Percentage Switching: " + df.format(s.switchWinPercentage()) + "%");
+			}
+		});
 
 		exit.addActionListener(new ActionListener() {
 
@@ -100,6 +119,7 @@ public class GameFrame {
 		});
 
 		file.add(newGame);
+		file.add(simulate);
 		file.add(exit);
 		menuBar.add(file);
 
